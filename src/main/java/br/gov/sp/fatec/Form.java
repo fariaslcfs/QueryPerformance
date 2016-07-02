@@ -26,6 +26,10 @@ import com.mysql.fabric.xmlrpc.base.Array;
 
 import javassist.bytecode.Descriptor.Iterator;
 
+/**
+ * @author usuario
+ *
+ */
 @SuppressWarnings("serial")
 public class Form extends Frame {
 
@@ -35,37 +39,40 @@ public class Form extends Frame {
 	Frame frm = new Frame("Teste Parsers");
 	int i_iter;
 	String uoracle, poracle, thard, tfirm, tsoft;
-	/*
-	 * String umysql; String pmysql; String usqlserver; String psqlserver;
-	 */
 
-	final Label lbiter = new Label("      NÃºmero de iteraÃ§Ãµes");
-	final Label lbuo = new Label("            UsuÃ¡rio Oracle");
+	String umysql;
+	String pmysql;
+	String usqlserver;
+	String psqlserver;
+
+	final Label lbiter = new Label("      Número de iterações");
+	final Label lbuo = new Label("            Usuário Oracle");
 	final Label lbpo = new Label("            Senha Oracle");
-	
-	/*
-	 * Label lbum = new Label("            UsuÃ¡rio Mysql"); Label lbus = new
-	 * Label("            UsuÃ¡rio SqlServer"); Label lbpm = new
-	 * Label("            Senha Mysql");
-	 */
 
-	/* Label lbps = new Label("            Senha SqlServer"); */
+	Label lbum = new Label("            Usuário Mysql");
+	Label lbus = new Label("            Usuário SqlServer");
+	Label lbpm = new Label("            Senha Mysql");
 
-	final Label lbbranco = new Label("\n                  TEMPO(s)");
+	Label lbps = new Label("            Senha SqlServer");
+
+	/*final Label lbbranco = new Label("\n                  TEMPO(s)");*/
 	final Label lbespaco = new Label(" \n");
 	final TextField iter = new TextField(20);
 	final TextField useroracle = new TextField(20);
 	final TextField passoracle = new TextField(20);
-	final TextField tempoh = new TextField(20);
+/*	final TextField tempoh = new TextField(20);
 	final TextField tempof = new TextField(20);
 	final TextField tempos = new TextField(20);
-	final TextField info = new TextField();
-	/*
-	 * final TextField usermysql = new TextField(20); final TextField passmysql
-	 * = new TextField(20); final TextField usersqlserver = new TextField(20);
-	 * final TextField passsqlserver = new TextField(20);
-	 */
+	final TextField info = new TextField();*/
 
+	final TextField usermysql = new TextField(20);
+	final TextField passmysql = new TextField(20);
+	final TextField usersqlserver = new TextField(20);
+	final TextField passsqlserver = new TextField(20);
+
+	/**
+	 * 
+	 */
 	public void criaForm() {
 
 		frm.setSize(250, 440);
@@ -85,11 +92,10 @@ public class Form extends Frame {
 		p.add(lbiter);
 		p.add(iter);
 
-		/*
-		 * p.add(lbum); p.add(usermysql);
-		 * 
-		 * p.add(lbpm); p.add(passmysql);
-		 */
+		
+		 p.add(lbum); p.add(usermysql);		 
+		 p.add(lbpm); p.add(passmysql);
+		 
 
 		p.add(lbuo);
 		p.add(useroracle);
@@ -98,11 +104,10 @@ public class Form extends Frame {
 		p.add(passoracle);
 
 
-		/*
-		 * p.add(lbus); p.add(usersqlserver);
-		 * 
-		 * p.add(lbps); p.add(passsqlserver);
-		 */
+		
+		 p.add(lbus); p.add(usersqlserver);
+		 p.add(lbps); p.add(passsqlserver);
+		 
 
 		p.add(lbespaco);
 		p.add(lbespaco);
@@ -116,25 +121,23 @@ public class Form extends Frame {
 				uoracle = useroracle.getText();
 				poracle = passoracle.getText();
 
-				/*
-				 * usqlserver = usersqlserver.getText(); psqlserver =
-				 * passsqlserver.getText(); umysql = usermysql.getText(); pmysq
-				 * = passmysql.getText();
-				 */
+				
+				 usqlserver = usersqlserver.getText();
+				 psqlserver =	 passsqlserver.getText(); 
+				 umysql = usermysql.getText(); 
+				 pmysql  = passmysql.getText();
+				 
 
 				try {
-					colrets = teste.Testar(i_iter, /*
-													 * usqlserver, psqlserver,
-													 * umysql, pmysql,
-													 */uoracle, poracle);
+					colrets = teste.Testar(i_iter, usqlserver, psqlserver, umysql, pmysql, uoracle, poracle);
 					int i = 0;
 					for (Double t : colrets) {
 						temposRetornados[i] = t;
 						i++;
 					}
-					tempoh.setText("HARD\t" + temposRetornados[0].toString());
+/*					tempoh.setText("HARD\t" + temposRetornados[0].toString());
 					tempof.setText("FIRM\t" + temposRetornados[1].toString());
-					tempos.setText("SOFT\t" + temposRetornados[2].toString());
+					tempos.setText("SOFT\t" + temposRetornados[2].toString());*/
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
 				} catch (SQLException e) {
@@ -147,10 +150,10 @@ public class Form extends Frame {
 		p.add(lbespaco);
 		p.add(Inicia);
 
-		p.add(lbbranco);
+/*		p.add(lbbranco);
 		p.add(tempoh);
 		p.add(tempof);
-		p.add(tempos);
+		p.add(tempos);*/
 		p1.add(p);
 		frm.add(p1, BorderLayout.NORTH);
 	}

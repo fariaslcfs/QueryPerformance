@@ -67,7 +67,7 @@ public class GraficoBarra extends ApplicationFrame {
 		dataset.setValue(timefirm, "TEMPO(s)", "FIRMCODED");
 		dataset.setValue(timesoft, "TEMPO(s)", "SOFTCODED");
 
-		JFreeChart chart = ChartFactory.createBarChart(title, type, "TEMPO(s)   para " + iteracao + " iteraÃ§Ãµes", dataset, PlotOrientation.VERTICAL, false, true, true);
+		JFreeChart chart = ChartFactory.createBarChart(title, type, "TEMPO(s)   para " + iteracao + " iterações", dataset, PlotOrientation.VERTICAL, false, true, true);
 
 		ChartPanel chartPanel = new ChartPanel(chart);
 		chartPanel.setPreferredSize(new java.awt.Dimension(407, 340));
@@ -78,7 +78,7 @@ public class GraficoBarra extends ApplicationFrame {
 
 	}
 
-/*	public void geraGraficoCompleto(String title, int iteracao, double timehardS, double timehardM, double timehardO, 
+	public void geraGraficoCompleto(String title, int iteracao, double timehardS, double timehardM, double timehardO, 
 																double timefirmS, double timefirmM, double timefirmO, 
 																double timesoftS, double timesoftM, double timesoftO) {
 
@@ -88,15 +88,15 @@ public class GraficoBarra extends ApplicationFrame {
 		
 		dataset.setValue(timehardS, "TEMPO(s)", "H_SQLSERVER");
 		dataset.setValue(timehardM, "TEMPO(s)", "H_MYSQL");
+		dataset.setValue(timehardO, "TEMPO(s)", "H_ORACLE");
 		dataset.setValue(timefirmS, "TEMPO(s)", "F_SQLSERVER");
 		dataset.setValue(timefirmM, "TEMPO(s)", "F_MYSQL");
+		dataset.setValue(timefirmO, "TEMPO(s)", "F_ORACLE");
 		dataset.setValue(timesoftS, "TEMPO(s)", "S_SQLSERVER");
-		dataset.setValue(timesoftM, "TEMPO(s)", "S_MYSQL");
-		dataset.setValue(timehardO, "TEMPO(s)", "H_ORACLE");
-		dataset.setValue(timefirmO, "TEMPO(s)", "F_ORACLE");	
+		dataset.setValue(timesoftM, "TEMPO(s)", "S_MYSQL");	
 		dataset.setValue(timesoftO, "TEMPO(s)", "S_ORACLE");
 
-		JFreeChart chart = ChartFactory.createBarChart(title, type, "TEMPO(s)   para " + iteracao + " iteraÃ§Ãµes", dataset, PlotOrientation.VERTICAL, false, true, true);
+		JFreeChart chart = ChartFactory.createBarChart(title, type, "TEMPO(s)   para " + iteracao + " iterações", dataset, PlotOrientation.VERTICAL, false, true, true);
 
 		ChartPanel chartPanel = new ChartPanel(chart);
 		chartPanel.setPreferredSize(new java.awt.Dimension(1265, 340));
@@ -112,5 +112,5 @@ public class GraficoBarra extends ApplicationFrame {
 		
 		plot.setRenderer(renderer); // ajusta a cor da barra individual (verde(mysql) - azul(oracle))
 		setContentPane(chartPanel); 
-	}*/
+	}
 }
