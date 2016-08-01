@@ -40,19 +40,19 @@ public class Teste {
 
 	ResultSet r;
 
-	String servico; // serviÃ§o correspondente Ã  chave
+	String servico; // serviço correspondente à  chave
 
 	String userMysql = "root";
 	String passMysql = "741555";
 	String connectorMysql = "jdbc:mysql://localhost/teste";
 
-	String connectorSqlServer = "jdbc:sqlserver://notepai:1433;databaseName=performance_graph;selectMethod=cursor";
+	String connectorSqlServer = "jdbc:sqlserver://hpquartinho:1433;databaseName=teste;selectMethod=cursor";
 	String userSqlServer = "sa";
 	String passSqlServer = "741555";
 
-	String userOracle = "sys as sysdba";
+	String userOracle = "system";
 	String passOracle = "741555";
-	String connectorOracle = "jdbc:oracle:oci:@//localhost:1521/xe";
+	String connectorOracle = "jdbc:oracle:thin:@//localhost:1521/xe";
 	
 	// --------------------------- HARDCODED SQLSERVER ----------------------------------------
 	public double StatSqlServerHard(int limite, String usqlserver, String psqlserver) throws ClassNotFoundException, SQLException {
