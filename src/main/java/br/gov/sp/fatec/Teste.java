@@ -20,6 +20,7 @@ import antlr.ParserSharedInputState;
  * email - fariaslcfs@gmail.com luiz.silva116@fatec.sp.gov.br
  */
 
+@SuppressWarnings("unused")
 public class Teste {
 	
 	Form form = new Form();
