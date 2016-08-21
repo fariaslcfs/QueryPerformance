@@ -30,7 +30,7 @@ import javassist.bytecode.Descriptor.Iterator;
  * @author usuario
  *
  */
-@SuppressWarnings("serial")
+@SuppressWarnings({ "serial", "unused" })
 public class Form extends Frame {
 
 	Collection<Double> colrets = new ArrayList<Double>();
