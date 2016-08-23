@@ -1,2 +1,2 @@
-TESTES COMPARATIVOS DE DESEMPENHO DE PARSERS PARA ACESSO JDBC JAVA. 
+Testes comparativos de desempenho de parsers para acesso JDBC Java. 
 HARDCODED - FIRMCODE - SOFTCODED
