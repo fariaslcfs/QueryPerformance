@@ -45,9 +45,9 @@ public class Teste {
 
 	String userMysql = "root";
 	String passMysql = "741555";
-	String connectorMysql = "jdbc:mysql://localhost/teste";
+	String connectorMysql = "jdbc:mysql://localhost/queryperformance";
 
-	String connectorSqlServer = "jdbc:sqlserver://hpquartinho:1433;databaseName=teste;selectMethod=cursor";
+	String connectorSqlServer = "jdbc:sqlserver://hpquartinho:1433;databaseName=queryperformance;selectMethod=cursor";
 	String userSqlServer = "sa";
 	String passSqlServer = "741555";
 

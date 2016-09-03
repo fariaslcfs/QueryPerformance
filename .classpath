@@ -23,7 +23,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/lib"/>
-	<classpathentry kind="lib" path="C:/Libs/sqljdbc_4.0/ptb/sqljdbc4.jar"/>
 	<classpathentry kind="lib" path="C:/oraclexe/app/oracle/product/11.2.0/server/jdbc/lib/ojdbc5.jar"/>
+	<classpathentry kind="lib" path="C:/Lib/sqljdbc4-2.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
