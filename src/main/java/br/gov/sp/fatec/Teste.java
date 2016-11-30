@@ -25,7 +25,6 @@ public class Teste {
 	
 	Form form = new Form();
 	int i;
-	
 	double time_before;
 	double time_after;
 
@@ -43,16 +42,16 @@ public class Teste {
 
 	String servico; // serviço correspondente à  chave
 
-	String userMysql = "root";
-	String passMysql = "741555";
-	String connectorMysql = "jdbc:mysql://localhost/queryperformance";
+	String userMysql = "USUARIO";
+	String passMysql = "SENHA";
+	String connectorMysql = "jdbc:mysql://localhost/NOME_BD";
 
-	String connectorSqlServer = "jdbc:sqlserver://hpquartinho:1433;databaseName=queryperformance;selectMethod=cursor";
-	String userSqlServer = "sa";
-	String passSqlServer = "741555";
+	String connectorSqlServer = "jdbc:sqlserver://NOME_PC:1433;databaseName=NOME_DB;selectMethod=cursor";
+	String userSqlServer = "USUARIO";
+	String passSqlServer = "SENHA";
 
-	String userOracle = "system";
-	String passOracle = "741555";
+	String userOracle = "USUARIO";
+	String passOracle = "SENHA";
 	String connectorOracle = "jdbc:oracle:thin:@//localhost:1521/xe";
 	
 	// --------------------------- HARDCODED SQLSERVER ----------------------------------------
