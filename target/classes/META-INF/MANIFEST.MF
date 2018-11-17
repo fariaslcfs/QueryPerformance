@@ -1,10 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
 Built-By: theone
-Build-Jdk: 1.8.0_102
-=======
-Built-By: usuario
 Build-Jdk: 1.8.0_92
->>>>>>> 5276aaf27fbcf3abd8fb0d2e5e628dffe48ef485
 Created-By: Maven Integration for Eclipse
 

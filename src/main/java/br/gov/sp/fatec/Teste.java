@@ -44,15 +44,31 @@ public class Teste {
 
 	String userMysql = "USUARIO";
 	String passMysql = "SENHA";
-	String connectorMysql = "jdbc:mysql://localhost/NOME_BD";
+	String connectorMysql = "jdbc:mysql://localhost/autopecas";
 
-	String connectorSqlServer = "jdbc:sqlserver://NOME_PC:1433;databaseName=NOME_DB;selectMethod=cursor";
+	String connectorSqlServer = "jdbc:sqlserver://notepai:1433;databaseName=autopecas;selectMethod=cursor";
 	String userSqlServer = "USUARIO";
 	String passSqlServer = "SENHA";
 
 	String userOracle = "USUARIO";
 	String passOracle = "SENHA";
 	String connectorOracle = "jdbc:oracle:thin:@//localhost:1521/xe";
+	
+	
+	public int getTabelSize(String usqlserver, String psqlserver) throws ClassNotFoundException, SQLException {
+		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+		Connection con = DriverManager.getConnection(connectorSqlServer, usqlserver, psqlserver);
+		Statement st = con.createStatement();
+		String query = "SELECT COUNT(*) AS SIZE FROM PRESTADO";
+		r = st.executeQuery(query);
+		int size = 0;
+		if (r.next()) {
+			size = r.getInt("SIZE");
+		}
+		r.close();
+		System.out.println("------ Size of tables in SQLServer, MySQL and Oracle  " + size + " ------");
+		return size;	
+	}
 	
 	// --------------------------- HARDCODED SQLSERVER ----------------------------------------
 	public double StatSqlServerHard(int limite, String usqlserver, String psqlserver) throws ClassNotFoundException, SQLException {
@@ -61,17 +77,17 @@ public class Teste {
 		Statement st = con.createStatement();
 		time_before = System.currentTimeMillis();
 		for (i = 1; i <= limite; i++) {
-			String query = "SELECT SERVICO FROM PRESTADO WHERE ID = 1";
+			String query = "SELECT SERVICO FROM PRESTADO WHERE ID = " + String.valueOf(i);
 			r = st.executeQuery(query);
 			if (r.next()) {
 				servico = r.getString(1);
 			}
 			r.close();
 		}
-		st.close();
 		time_after = System.currentTimeMillis();
 		time_elapsed_sqlserver_hard = (time_after - time_before) / 1000;
 		System.out.println("Tempo total para o modo HARDCODED_SQLSERVER: " + time_elapsed_sqlserver_hard + " segundo(s) - " + servico);
+		st.close();
 		return time_elapsed_sqlserver_hard;
 	}
 
@@ -82,17 +98,17 @@ public class Teste {
 		Statement st = con.createStatement();
 		time_before = System.currentTimeMillis();
 		for (i = 1; i <= limite; i++) {
-			String query = "SELECT SERVICO FROM PRESTADO WHERE ID = 1";
+			String query = "SELECT SERVICO FROM PRESTADO WHERE ID = " + String.valueOf(i);
 			r = st.executeQuery(query);
 			if (r.next()) {
 				servico = r.getString(1);
 			}
 			r.close();
 		}
-		st.close();
 		time_after = System.currentTimeMillis();
 		time_elapsed_mysql_hard = (time_after - time_before) / 1000;
 		System.out.println("Tempo total para o modo HARDCODED_MYSQL: " + time_elapsed_mysql_hard + " segundo(s) - " + servico);
+		st.close();
 		return time_elapsed_mysql_hard;
 	}
 
@@ -103,17 +119,17 @@ public class Teste {
 		Statement st = con.createStatement();
 		time_before = System.currentTimeMillis();
 		for (i = 1; i <= limite; i++) {
-			String query = "SELECT SERVICO FROM PRESTADO WHERE ID = 1";
+			String query = "SELECT SERVICO FROM PRESTADO WHERE ID = " + String.valueOf(i);
 			r = st.executeQuery(query);
 			if (r.next()) {
 				servico = r.getString(1);
 			}
 			r.close();
 		}
-		st.close();
 		time_after = System.currentTimeMillis();
 		time_elapsed_oracle_hard = (time_after - time_before) / 1000;
 		System.out.println("Tempo total para o modo HARDCODED_ORACLE: " + time_elapsed_oracle_hard + " segundo(s) - " + servico);
+		st.close();
 		return time_elapsed_oracle_hard;
 	}
 
@@ -124,7 +140,7 @@ public class Teste {
 		time_before = System.currentTimeMillis();
 		for (i = 1; i <= limite; i++) {
 			PreparedStatement pst = con.prepareStatement("SELECT SERVICO FROM PRESTADO WHERE ID = ?");
-			pst.setInt(1, 1);
+			pst.setInt(1, i);
 			r = pst.executeQuery();
 			if (r.next()) {
 				servico = r.getString(1);
@@ -144,7 +160,7 @@ public class Teste {
 		time_before = System.currentTimeMillis();
 		for (i = 1; i <= limite; i++) {
 			PreparedStatement pst = con.prepareStatement("SELECT SERVICO FROM PRESTADO WHERE ID = ?");
-			pst.setInt(1, 1);
+			pst.setInt(1, i);
 			r = pst.executeQuery();
 			if (r.next()) {
 				servico = r.getString(1);
@@ -164,7 +180,7 @@ public class Teste {
 		time_before = System.currentTimeMillis();
 		for (i = 1; i <= limite; i++) {
 			PreparedStatement pst = con.prepareStatement("SELECT SERVICO FROM PRESTADO WHERE ID = ?");
-			pst.setInt(1, 1);
+			pst.setInt(1, i);
 			r = pst.executeQuery();
 			if (r.next()) {
 				servico = r.getString(1);
@@ -183,17 +199,16 @@ public class Teste {
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		Connection con = DriverManager.getConnection(connectorSqlServer, usqlserver, psqlserver);
 		time_before = System.currentTimeMillis();
-		PreparedStatement pst = con
-				.prepareStatement("SELECT SERVICO FROM PRESTADO WHERE ID = ?");
 		for (i = 1; i <= limite; i++) {
-			pst.setInt(1, 1);
+			PreparedStatement pst = con.prepareStatement("SELECT SERVICO FROM PRESTADO WHERE ID = ?");
+			pst.setInt(1, i);
 			r = pst.executeQuery();
 			if (r.next()) {
 				servico = r.getString(1);
 			}
 			r.close();
+			pst.close();
 		}
-		pst.close();
 		time_after = System.currentTimeMillis();
 		time_elapsed_mysql_soft = (time_after - time_before) / 1000;
 		System.out.println("Tempo total para o modo SOFTCODED_SQLSERVER: " + time_elapsed_mysql_soft + " segundo(s) - " + servico);
@@ -205,16 +220,16 @@ public class Teste {
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con = DriverManager.getConnection(connectorMysql, umysql, pmysql);
 		time_before = System.currentTimeMillis();
-		PreparedStatement pst = con.prepareStatement("SELECT SERVICO FROM PRESTADO WHERE ID = ?");
 		for (i = 1; i <= limite; i++) {
-			pst.setInt(1, 1);
+			PreparedStatement pst = con.prepareStatement("SELECT SERVICO FROM PRESTADO WHERE ID = ?");
+			pst.setInt(1, i);
 			r = pst.executeQuery();
 			if (r.next()) {
 				servico = r.getString(1);
 			}
 			r.close();
+			pst.close();
 		}
-		pst.close();
 		time_after = System.currentTimeMillis();
 		time_elapsed_mysql_soft = (time_after - time_before) / 1000;
 		System.out.println("Tempo total para o modo SOFTCODED_MYSQL: " + time_elapsed_mysql_soft + " segundo(s) - " + servico);
@@ -227,16 +242,16 @@ public class Teste {
 		Class.forName("oracle.jdbc.OracleDriver");
 		Connection con = DriverManager.getConnection(connectorOracle, uoracle, poracle);
 		time_before = System.currentTimeMillis();
-		PreparedStatement pst = con.prepareStatement("SELECT SERVICO FROM PRESTADO WHERE ID = ?");
 		for (i = 1; i <= limite; i++) {
-			pst.setInt(1, 1);
+			PreparedStatement pst = con.prepareStatement("SELECT SERVICO FROM PRESTADO WHERE ID = ?");
+			pst.setInt(1, i);
 			r = pst.executeQuery();
 			if (r.next()) {
 				servico = r.getString(1);
 			}
 			r.close();
+			pst.close();
 		}
-		pst.close();
 		time_after = System.currentTimeMillis();
 		time_elapsed_oracle_soft = (time_after - time_before) / 1000;
 		System.out.println("Tempo total para o modo SOFTCODED_ORACLE: " + time_elapsed_oracle_soft + " segundo(s) - " + servico);
@@ -249,6 +264,8 @@ public class Teste {
 
 		Teste teste = new Teste();
 		
+		int size = teste.getTabelSize(usersqlserver, passsqlserver);
+		
 		Collection<Double> colrets = new ArrayList<Double>();
 		
 		GraficoBarra gbSqlServer = new GraficoBarra("");
@@ -256,44 +273,44 @@ public class Teste {
 		GraficoBarra gbComplete = new GraficoBarra("");
 		
 		GraficoBarra gbOracle = new GraficoBarra("");
-		double t1 = teste.StatSqlServerHard(limite,usersqlserver,passsqlserver);
-		double t2 = teste.PrepStatSqlServerlFirm(limite,usersqlserver,passsqlserver);
-		double t3 = teste.PrepStatSqlServerSoft(limite,usersqlserver,passsqlserver);
+		double t1 = teste.StatSqlServerHard(size,usersqlserver,passsqlserver);
+		double t2 = teste.PrepStatSqlServerlFirm(size,usersqlserver,passsqlserver);
+		double t3 = teste.PrepStatSqlServerSoft(size,usersqlserver,passsqlserver);
 
-		double t4 = teste.StatMysqlHard(limite,usermysql,passmysql);
-		double t5 = teste.PrepStatMysqlFirm(limite,usermysql,passmysql);
-		double t6 = teste.PrepStatMysqlSoft(limite,usermysql,passmysql);
+		double t4 = teste.StatMysqlHard(size,usermysql,passmysql);
+		double t5 = teste.PrepStatMysqlFirm(size,usermysql,passmysql);
+		double t6 = teste.PrepStatMysqlSoft(size,usermysql,passmysql);
 
-		Double t7 = teste.StatOracleHard(limite,useroracle,passoracle);
+		Double t7 = teste.StatOracleHard(size,useroracle,passoracle);
 		colrets.add(t7); 
-		Double t8 = teste.PrepStatOracleFirm(limite,useroracle,passoracle);
+		Double t8 = teste.PrepStatOracleFirm(size,useroracle,passoracle);
 		colrets.add(t8);
-		Double t9 = teste.PrepStatlOracleSoft(limite,useroracle,passoracle);
+		Double t9 = teste.PrepStatlOracleSoft(size,useroracle,passoracle);
 		colrets.add(t9);
 		Color r = new Color(255, 0, 0, 200);
 		Color g = new Color(0, 255, 0, 200);
 		Color b = new Color(0, 0, 255, 200);
 
 		// GRÁFICO SQLSERVER
-		gbSqlServer.geraGrafico("DESEMPENHO PARSER SQLSERVER", limite, r, t1, t2, t3);
+		gbSqlServer.geraGrafico("DESEMPENHO PARSER SQLSERVER", size, r, t1, t2, t3);
 		gbSqlServer.pack();
 		RefineryUtilities.positionFrameOnScreen(gbSqlServer, 0.0, 0.0);
 		gbSqlServer.setVisible(true);
 
 		// GRÁFICO MYSQL
-		gbMysql.geraGrafico("DESEMPENHO PARSER MYSQL", limite, g, t4, t5, t6);
+		gbMysql.geraGrafico("DESEMPENHO PARSER MYSQL", size, g, t4, t5, t6);
 		gbMysql.pack();
 		RefineryUtilities.positionFrameOnScreen(gbMysql, 0.50, 0.0);
 		gbMysql.setVisible(true);
 
 		// GRÁFICO ORACLE
-		gbOracle.geraGrafico("DESEMPENHO PARSER ORACLE", limite, b, t7, t8, t9);
+		gbOracle.geraGrafico("DESEMPENHO PARSER ORACLE", size, b, t7, t8, t9);
 		gbOracle.pack();
 		RefineryUtilities.positionFrameOnScreen(gbOracle, 1.0, 0.0);
 		gbOracle.setVisible(true);
 
 		// GRÁFICO SQLSERVER-MYSQL-ORACLE
-		gbComplete.geraGraficoCompleto("DESEMPENHO COMPARATIVO PARSERS SQLSERVER-MYSQL-ORACLE", limite, t1, t4, t7, t2, t5, t8, t3, t6, t9);
+		gbComplete.geraGraficoCompleto("DESEMPENHO COMPARATIVO PARSERS SQLSERVER-MYSQL-ORACLE", size, t1, t4, t7, t2, t5, t8, t3, t6, t9);
 		gbComplete.pack();
 		RefineryUtilities.positionFrameOnScreen(gbComplete, 0.5, 0.9);
 		gbComplete.setVisible(true);

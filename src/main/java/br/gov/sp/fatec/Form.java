@@ -45,7 +45,7 @@ public class Form extends Frame {
 	String usqlserver;
 	String psqlserver;
 
-	final Label lbiter = new Label("      Número de iterações");
+	//final Label lbiter = new Label("      Número de iterações");
 	final Label lbuo = new Label("            Usuário Oracle");
 	final Label lbpo = new Label("            Senha Oracle");
 
@@ -57,7 +57,7 @@ public class Form extends Frame {
 
 	/*final Label lbbranco = new Label("\n                  TEMPO(s)");*/
 	final Label lbespaco = new Label(" \n");
-	final TextField iter = new TextField(20);
+	//final TextField iter = new TextField(20);
 	final TextField useroracle = new TextField(20);
 	final TextField passoracle = new TextField(20);
 /*	final TextField tempoh = new TextField(20);
@@ -89,8 +89,8 @@ public class Form extends Frame {
 
 		p.setLayout(new GridLayout(0, 1));
 
-		p.add(lbiter);
-		p.add(iter);
+		//p.add(lbiter);
+		//p.add(iter);
 
 		
 		 p.add(lbum); p.add(usermysql);		 
@@ -117,7 +117,7 @@ public class Form extends Frame {
 		Inicia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				Teste teste = new Teste();
-				i_iter = Integer.parseInt(iter.getText());
+				//i_iter = Integer.parseInt(iter.getText());
 				uoracle = useroracle.getText();
 				poracle = passoracle.getText();
 
