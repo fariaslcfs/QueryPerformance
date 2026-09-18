@@ -74,11 +74,11 @@ public class Teste {
 	public double StatSqlServerHard(int limite, String usqlserver, String psqlserver) throws ClassNotFoundException, SQLException {
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		Connection con = DriverManager.getConnection(connectorSqlServer, usqlserver, psqlserver);
-		Statement st = con.createStatement();
+		PreparedStatement pst = con.prepareStatement("SELECT SERVICO FROM PRESTADO WHERE ID = ?");
 		time_before = System.currentTimeMillis();
 		for (i = 1; i <= limite; i++) {
-			String query = "SELECT SERVICO FROM PRESTADO WHERE ID = " + String.valueOf(i);
-			r = st.executeQuery(query);
+			pst.setInt(1, i);
+			r = pst.executeQuery();
 			if (r.next()) {
 				servico = r.getString(1);
 			}
@@ -87,7 +87,7 @@ public class Teste {
 		time_after = System.currentTimeMillis();
 		time_elapsed_sqlserver_hard = (time_after - time_before) / 1000;
 		System.out.println("Tempo total para o modo HARDCODED_SQLSERVER: " + time_elapsed_sqlserver_hard + " segundo(s) - " + servico);
-		st.close();
+		pst.close();
 		return time_elapsed_sqlserver_hard;
 	}
 
@@ -95,11 +95,11 @@ public class Teste {
 	public double StatMysqlHard(int limite, String umysql, String pmysql) throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con = DriverManager.getConnection(connectorMysql, umysql, pmysql);
-		Statement st = con.createStatement();
+		PreparedStatement pst = con.prepareStatement("SELECT SERVICO FROM PRESTADO WHERE ID = ?");
 		time_before = System.currentTimeMillis();
 		for (i = 1; i <= limite; i++) {
-			String query = "SELECT SERVICO FROM PRESTADO WHERE ID = " + String.valueOf(i);
-			r = st.executeQuery(query);
+			pst.setInt(1, i);
+			r = pst.executeQuery();
 			if (r.next()) {
 				servico = r.getString(1);
 			}
@@ -108,7 +108,7 @@ public class Teste {
 		time_after = System.currentTimeMillis();
 		time_elapsed_mysql_hard = (time_after - time_before) / 1000;
 		System.out.println("Tempo total para o modo HARDCODED_MYSQL: " + time_elapsed_mysql_hard + " segundo(s) - " + servico);
-		st.close();
+		pst.close();
 		return time_elapsed_mysql_hard;
 	}
 
@@ -116,11 +116,11 @@ public class Teste {
 	public double StatOracleHard(int limite, String uoracle, String poracle) throws ClassNotFoundException,	SQLException {
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 		Connection con = DriverManager.getConnection(connectorOracle, uoracle, poracle);
-		Statement st = con.createStatement();
+		PreparedStatement pst = con.prepareStatement("SELECT SERVICO FROM PRESTADO WHERE ID = ?");
 		time_before = System.currentTimeMillis();
 		for (i = 1; i <= limite; i++) {
-			String query = "SELECT SERVICO FROM PRESTADO WHERE ID = " + String.valueOf(i);
-			r = st.executeQuery(query);
+			pst.setInt(1, i);
+			r = pst.executeQuery();
 			if (r.next()) {
 				servico = r.getString(1);
 			}
@@ -129,7 +129,7 @@ public class Teste {
 		time_after = System.currentTimeMillis();
 		time_elapsed_oracle_hard = (time_after - time_before) / 1000;
 		System.out.println("Tempo total para o modo HARDCODED_ORACLE: " + time_elapsed_oracle_hard + " segundo(s) - " + servico);
-		st.close();
+		pst.close();
 		return time_elapsed_oracle_hard;
 	}
 
